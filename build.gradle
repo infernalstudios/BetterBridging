@@ -46,11 +46,11 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-            arg '-mixin.config=shieldexp.mixins.json'
+            arg '-mixin.config=betterbridging.mixins.json'
             property 'forge.logging.markers', 'SCAN,REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             mods {
-                shieldexp {
+                betterbridging {
                     source sourceSets.main
                 }
             }
@@ -58,11 +58,11 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            arg '-mixin.config=shieldexp.mixins.json'
+            arg '-mixin.config=betterbridging.mixins.json'
             property 'forge.logging.markers', 'SCAN,REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             mods {
-                shieldexp {
+                betterbridging {
                     source sourceSets.main
                 }
             }
@@ -72,9 +72,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'shieldexp', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'betterbridging', '--all', '--output', file('src/generated/resources/')
             mods {
-                shieldexp {
+                betterbridging {
                     source sourceSets.main
                 }
             }
@@ -83,8 +83,8 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, 'shieldexp.refmap.json'
-    config 'shieldexp.mixins.json'
+    add sourceSets.main, 'betterbridging.refmap.json'
+    config 'betterbridging.mixins.json'
 
     debug.verbose = true
     debug.export = true
@@ -112,7 +112,6 @@ jar {
                 'Implementation-Title'  : config.TITLE,
                 'Implementation-Version': config.VERSION,
                 'Implementation-Vendor' : config.AUTHOR,
-                'MixinConfigs'          : 'shieldexp.mixins.json',
         ])
     }
 }
@@ -131,8 +130,8 @@ publishing {
             version "${config.VERSION}-${config.MINECRAFT_VERSION}"
 
             pom {
-                name = 'Shield Expansion'
-                url = 'https://infernalstudios.org/shieldexp'
+                name = 'Better Bridging'
+                url = 'https://infernalstudios.org/betterbridging'
                 licenses {
                     license {
                         name = 'Apache License 2.0'
@@ -140,8 +139,8 @@ publishing {
                     }
                 }
                 scm {
-                    connection = 'scm:git:git://github.com/infernalexp/Shield-Expansion.git'
-                    url = 'https://github.com/infernalexp/Shield-Expansion'
+                    connection = 'scm:git:git://github.com/infernalexp/Better-Bridging.git'
+                    url = 'https://github.com/infernalexp/Better-Bridging'
                 }
             }
         }
@@ -159,25 +158,6 @@ publishing {
                 basic(BasicAuthentication)
             }
         }
-    }
-}
-
-task publishModrinth() {
-    println('Modrinth publishing is not setup yet!')
-}
-
-curseforge {
-    apiKey = System.getenv('CURSEFORGE') ?: 'If you\'re seeing this, you haven\'t set your "CURSEFORGE" environment variable'
-
-    project {
-        id = config.CURSEFORGE_ID
-        changelog = 'No changelog specified.'
-        releaseType = 'alpha'
-        addGameVersion config.MINECRAFT_VERSION
-        mainArtifact (jar) {
-            displayName = "Shield Expansion Alpha ${project.version}"
-        }
-//        addArtifact sourcesJar
     }
 }
 

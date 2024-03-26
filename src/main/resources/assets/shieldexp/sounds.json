@@ -1,8 +1,0 @@
-{
-  "parry_sound": {
-    "subtitle": "sounds.shieldexp.parry_sound",
-    "sounds": [
-      "shieldexp:parry_sound"
-    ]
-  }
-}
