@@ -39,7 +39,7 @@ public class ItemsInit {
 
         @Override
         public int getEnchantmentValue() {
-            return 0;
+            return 10;
         }
 
         @Override

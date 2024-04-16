@@ -16,7 +16,7 @@ public class NetworkInit {
     public static void registerPackets() {
         INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(BetterBridging.MOD_ID, "packets"), () -> "1.0", s -> true, s -> true);
 
-        INSTANCE.registerMessage(nextID(), RequestDirectionPacket.class, RequestDirectionPacket::encode, RequestDirectionPacket::new, RequestDirectionPacket::handle);
-        INSTANCE.registerMessage(nextID(), DirectionResponsePacket.class, DirectionResponsePacket::encode, DirectionResponsePacket::new, DirectionResponsePacket::handle);
+        INSTANCE.registerMessage(nextID(), CycleEnum.class, CycleEnum::encode, CycleEnum::new, CycleEnum::handle);
+        INSTANCE.registerMessage(nextID(), ResetEnum.class, ResetEnum::encode, ResetEnum::new, ResetEnum::handle);
     }
 }

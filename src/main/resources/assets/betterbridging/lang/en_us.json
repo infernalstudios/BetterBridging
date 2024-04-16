@@ -1,3 +1,5 @@
 {
-  "item.betterbridging.bridge_brace": "Bridge Brace"
+  "item.betterbridging.bridge_brace": "Bridge Brace",
+  "enchantment.betterbridging.widening": "Widening",
+  "key.betterbridging.cycle": "Rotate Bridge Brace"
 }

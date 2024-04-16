@@ -19,30 +19,30 @@ public class WideningEnchantment extends Enchantment {
     public int getMaxCost(int enchantmentLevel) {return this.getMinCost(enchantmentLevel) + 50;}
 
     @Override
-    public int getMaxLevel() {return 1;}
+    public int getMaxLevel() {return 2;}
 
     @Override
     public boolean checkCompatibility(Enchantment ench) {return !(ench instanceof MendingEnchantment) && super.checkCompatibility(ench);}
 
     @Override
-    public boolean isTreasureOnly() {return Config.getWideningEnabled() && !Config.getEnchantmentSource(Config.ENABLE_TABLE);}
+    public boolean isTreasureOnly() {return Config.ENABLE_WIDENING.get() && !Config.getEnchantmentSource(Config.ENABLE_TABLE);}
 
     @Override
-    public boolean isTradeable() {return Config.getWideningEnabled() && Config.getEnchantmentSource(Config.ENABLE_TRADE);}
+    public boolean isTradeable() {return Config.ENABLE_WIDENING.get() && Config.getEnchantmentSource(Config.ENABLE_TRADE);}
 
     @Override
-    public boolean isDiscoverable() {return Config.getWideningEnabled() && Config.getEnchantmentSource(Config.ENABLE_LOOT);}
+    public boolean isDiscoverable() {return Config.ENABLE_WIDENING.get() && Config.getEnchantmentSource(Config.ENABLE_LOOT);}
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return Config.getWideningEnabled()
+        return Config.ENABLE_WIDENING.get()
                 && Config.getEnchantmentSource(Config.ENABLE_TABLE)
                 && (stack.getItem() == ItemsInit.BRIDGE_BRACE.get() || stack.getItem() == Items.BOOK);
     }
 
     @Override
-    public boolean canEnchant(ItemStack stack) {return (stack.getItem() == ItemsInit.BRIDGE_BRACE.get() || stack.getItem() == Items.BOOK) && Config.getWideningEnabled();}
+    public boolean canEnchant(ItemStack stack) {return (stack.getItem() == ItemsInit.BRIDGE_BRACE.get() || stack.getItem() == Items.BOOK) && Config.ENABLE_WIDENING.get();}
 
     @Override
-    public boolean isAllowedOnBooks() {return Config.getWideningEnabled();}
+    public boolean isAllowedOnBooks() {return Config.ENABLE_WIDENING.get();}
 }

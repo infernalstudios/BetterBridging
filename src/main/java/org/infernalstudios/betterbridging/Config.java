@@ -15,8 +15,6 @@ public class Config {
     public static ForgeConfigSpec.BooleanValue ENABLE_TRADE;
     public static ForgeConfigSpec.BooleanValue ENABLE_LOOT;
 
-    public static Boolean getWideningEnabled() { return ENABLE_WIDENING.get(); }
-
     public static Boolean getEnchantmentSource(ForgeConfigSpec.BooleanValue source) {
         return source.get();
     }

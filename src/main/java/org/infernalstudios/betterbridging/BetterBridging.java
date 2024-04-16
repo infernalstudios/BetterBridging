@@ -25,10 +25,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.infernalstudios.betterbridging.client.RenderEvent;
+import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
 import org.infernalstudios.betterbridging.events.CreativeTabEvents;
 import org.infernalstudios.betterbridging.items.*;
-import org.infernalstudios.betterbridging.events.ClientEvents;
 import org.infernalstudios.betterbridging.events.BridgingEvents;
+import org.infernalstudios.betterbridging.network.DirectionMap;
 import org.infernalstudios.betterbridging.network.NetworkInit;
 
 @Mod("betterbridging")
@@ -36,9 +38,14 @@ public class BetterBridging {
     public static final String NAME = "Better Bridging";
     public static final String MOD_ID = "betterbridging";
 
+    public static BetterBridging instance;
+
     public BetterBridging() {
+        instance = this;
+
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         ItemsInit.ITEMS.register(modBus);
+        EnchantmentsInit.ENCHANTMENTS.register(modBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SERVER_CONFIG, "BetterBridging-common.toml");
 
@@ -46,11 +53,12 @@ public class BetterBridging {
         modBus.addListener(this::commonSetup);
         modBus.addListener(CreativeTabEvents::registerCreativeTab);
 
+        MinecraftForge.EVENT_BUS.register(new DirectionMap());
         MinecraftForge.EVENT_BUS.register(new BridgingEvents());
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientEvents::setup);
+        MinecraftForge.EVENT_BUS.register(new RenderEvent());
     }
 
     @SubscribeEvent
