@@ -1,6 +1,8 @@
 package org.infernalstudios.betterbridging.network;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.UUID;
@@ -9,17 +11,21 @@ import java.util.function.Supplier;
 public class CycleEnum {
     private static final int MAX = 32767 * 2;
     UUID id;
+    int dir;
 
     public CycleEnum(FriendlyByteBuf buf) {
         this.id = buf.readUUID();
+        this.dir = buf.readInt();
     }
 
     public void encode(FriendlyByteBuf buf){
         buf.writeUUID(id);
+        buf.writeInt(dir);
     }
 
-    public CycleEnum(UUID id){
+    public CycleEnum(UUID id, int dir){
         this.id = id;
+        this.dir = dir;
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx){
@@ -28,9 +34,6 @@ public class CycleEnum {
     }
 
     private void handle() {
-        int old = DirectionMap.DIRECTION_MAP.get(id);
-        int updated = old+1;
-        if (updated > 3) updated = 0;
-        DirectionMap.DIRECTION_MAP.put(id, updated);
+        DirectionMap.DIRECTION_MAP.put(id, dir);
     }
 }
