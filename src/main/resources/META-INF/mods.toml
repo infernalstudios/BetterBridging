@@ -9,7 +9,11 @@ displayName="Better Bridging"
 updateJSONURL="https://infernalstudios.org/api/mods/betterbridging/forge"
 logoFile="logo.png"
 authors="Infernal Studios"
-description=""
+description='''Better Bridging adds the Bridge Brace, an item which allows you to place a column of mulitple blocks in one go when held in your off-hand.
+
+Credits:
+tinytransfem - Developer
+Nekomaster1000 - Conceptualiser, Artist'''
 [[dependencies.betterbridging]]
     modId="forge"
     mandatory=true
