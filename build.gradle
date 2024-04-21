@@ -21,6 +21,7 @@ buildscript {
 plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -92,19 +93,43 @@ mixin {
     dumpTargetOnFailure = true
 }
 
+configurations {
+    packIntoJar {
+        transitive = false
+    }
+}
+
 repositories {
     maven { url = 'https://repo.spongepowered.org/maven/' }
 
     jcenter()
     mavenCentral()
+
+    maven {
+        url = 'https://maven.infernalstudios.org/' + (config.CONFIG_LIB_VERSION.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases')
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${config.MINECRAFT_VERSION}-${config.FORGE_VERSION}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation "org.infernalstudios:config:${config.CONFIG_LIB_VERSION}"
+    packIntoJar "org.infernalstudios:config:${config.CONFIG_LIB_VERSION}"
+}
+
+shadowJar {
+    classifier ''
+    configurations = [project.configurations.packIntoJar]
+    relocate 'org.infernalstudios.config', 'org.infernalstudios.foodeffects.config.library'
+}
+
+reobf {
+    shadowJar {}
 }
 
 jar {
+    classifier 'base'
+
     manifest {
         attributes([
                 'Specification-Title'   : config.TITLE,
@@ -118,6 +143,9 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
+
+tasks.build.dependsOn shadowJar
+tasks.build.dependsOn reobfShadowJar
 
 //tasks.build.dependsOn sourcesJar
 

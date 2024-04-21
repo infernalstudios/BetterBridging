@@ -10,10 +10,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.infernalstudios.betterbridging.Config;
+import org.infernalstudios.betterbridging.BetterBridgingConfig;
 import org.infernalstudios.betterbridging.access.LivingEntityAccess;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
 import org.infernalstudios.betterbridging.items.ItemsInit;
@@ -34,8 +33,8 @@ public class BridgingEvents {
             UUID playerId = player.getUUID();
             Direction nextDirection = getDirection(playerId);
 
-            int width = Config.DEFAULT_WIDTH.get();
-            if (Config.ENABLE_WIDENING.get()) {
+            int width = BetterBridgingConfig.General.defaultWidth;
+            if (BetterBridgingConfig.Enchantment.enableWidening) {
                 int enchLevel = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentsInit.WIDENING.get(), player.getOffhandItem());
                 if (enchLevel > 0) width = width + (enchLevel * 2);
             }

@@ -11,18 +11,15 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.infernalstudios.betterbridging.Config;
+import org.infernalstudios.betterbridging.BetterBridgingConfig;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
 import org.infernalstudios.betterbridging.items.ItemsInit;
 import org.infernalstudios.betterbridging.network.DirectionMap;
@@ -86,8 +83,8 @@ public class OutlineRenderer {
                 VoxelShape shape = Blocks.DIRT.defaultBlockState().getShape(level, pos);
                 renderVoxelShape(matrixStack, builder, shape, pos.getX() - pX, pos.getY() - pY, pos.getZ() - pZ, r, g, b, a/3);
 
-                int width = Config.DEFAULT_WIDTH.get();
-                if (Config.ENABLE_WIDENING.get()) {
+                int width = BetterBridgingConfig.General.defaultWidth;
+                if (BetterBridgingConfig.Enchantment.enableWidening) {
                     int enchLevel = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentsInit.WIDENING.get(), player.getOffhandItem());
                     if (enchLevel > 0) width = width + (enchLevel * 2);
                 }
