@@ -12,6 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -87,7 +88,7 @@ public class OutlineRenderer {
 
                 int width = Config.DEFAULT_WIDTH.get();
                 if (Config.ENABLE_WIDENING.get()) {
-                    int enchLevel = player.getOffhandItem().getEnchantmentLevel(EnchantmentsInit.WIDENING.get());
+                    int enchLevel = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentsInit.WIDENING.get(), player.getOffhandItem());
                     if (enchLevel > 0) width = width + (enchLevel * 2);
                 }
                 int placedWidth = 1;

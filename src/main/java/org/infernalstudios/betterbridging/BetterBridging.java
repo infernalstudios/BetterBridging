@@ -23,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.infernalstudios.betterbridging.client.KeyMappings;
 import org.infernalstudios.betterbridging.client.RenderEvent;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
 import org.infernalstudios.betterbridging.items.*;
@@ -55,6 +56,7 @@ public class BetterBridging {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new RenderEvent());
+        KeyMappings.registerKeys();
     }
 
     @SubscribeEvent

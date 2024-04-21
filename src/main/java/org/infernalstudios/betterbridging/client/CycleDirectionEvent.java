@@ -20,7 +20,7 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = BetterBridging.MOD_ID, value = Dist.CLIENT)
 public class CycleDirectionEvent {
     @SubscribeEvent
-    public static void onKeyInput(InputEvent.Key event) {
+    public static void onKeyInput(InputEvent.KeyInputEvent event) {
         if (KeyMappings.CYCLE_KEY.consumeClick()) {
             Player player = Minecraft.getInstance().player;
             if (player != null) {

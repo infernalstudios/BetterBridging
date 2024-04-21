@@ -7,10 +7,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.infernalstudios.betterbridging.Config;
 import org.infernalstudios.betterbridging.access.LivingEntityAccess;
@@ -35,19 +36,18 @@ public class BridgingEvents {
 
             int width = Config.DEFAULT_WIDTH.get();
             if (Config.ENABLE_WIDENING.get()) {
-                int enchLevel = player.getOffhandItem().getEnchantmentLevel(EnchantmentsInit.WIDENING.get());
+                int enchLevel = EnchantmentHelper.getItemEnchantmentLevel(EnchantmentsInit.WIDENING.get(), player.getOffhandItem());
                 if (enchLevel > 0) width = width + (enchLevel * 2);
             }
 
             int placedWidth = 1;
             int placedDistance = 0;
             int possibleDistance = player.getMainHandItem().getCount();
-            LevelAccessor level = event.getLevel();
+            LevelAccessor level = event.getWorld();
             while (placedWidth < width && player.getMainHandItem().getItem() instanceof BlockItem blockItem && blockItem.getBlock().defaultBlockState() == event.getPlacedBlock() && (possibleDistance > 1 || player.isCreative())) {
                 BlockPos additionalPos = event.getPos().relative(nextDirection, 1 + placedDistance / 2);
-                if (event.getLevel().getBlockState(additionalPos).getMaterial().isReplaceable()) {
+                if (event.getWorld().getBlockState(additionalPos).getMaterial().isReplaceable()) {
                     level.setBlock(additionalPos, event.getPlacedBlock(), 3);
-                    level.gameEvent(GameEvent.BLOCK_CHANGE, additionalPos, GameEvent.Context.of(player, level.getBlockState(additionalPos)));
                     possibleDistance--;
                     player.getOffhandItem().hurtAndBreak(1, player, (pl) -> {
                         pl.broadcastBreakEvent(EquipmentSlot.OFFHAND);
