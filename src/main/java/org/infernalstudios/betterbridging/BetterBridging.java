@@ -23,12 +23,19 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
+
+import java.io.IOException;
+
 import org.infernalstudios.betterbridging.client.RenderEvent;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
 import org.infernalstudios.betterbridging.items.*;
 import org.infernalstudios.betterbridging.events.BridgingEvents;
 import org.infernalstudios.betterbridging.network.DirectionMap;
 import org.infernalstudios.betterbridging.network.NetworkInit;
+import org.infernalstudios.config.Config;
+
+import com.electronwill.nightconfig.core.io.ParsingException;
 
 @Mod("betterbridging")
 public class BetterBridging {
@@ -44,7 +51,16 @@ public class BetterBridging {
         ItemsInit.ITEMS.register(modBus);
         EnchantmentsInit.ENCHANTMENTS.register(modBus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SERVER_CONFIG, "BetterBridging-common.toml");
+         try {
+            BetterBridgingConfig.INSTANCE = Config
+                .builder(FMLPaths.CONFIGDIR.get().resolve("BetterBridging-common.toml"))
+                .loadClass(BetterBridgingConfig.class, true)
+                .build();
+        } catch (IllegalStateException | IllegalArgumentException | IOException | ParsingException e) {
+            throw new RuntimeException(
+                "Failed to load BetterBridging config" +
+                (e instanceof ParsingException ? ", try fixing/deleting your config file" : ""), e);
+        }
 
         modBus.addListener(this::clientSetup);
         modBus.addListener(this::commonSetup);
