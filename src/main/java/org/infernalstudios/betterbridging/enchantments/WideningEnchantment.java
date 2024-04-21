@@ -6,7 +6,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.MendingEnchantment;
-import org.infernalstudios.betterbridging.Config;
+import org.infernalstudios.betterbridging.BetterBridgingConfig;
 import org.infernalstudios.betterbridging.items.ItemsInit;
 
 public class WideningEnchantment extends Enchantment {
@@ -25,24 +25,24 @@ public class WideningEnchantment extends Enchantment {
     public boolean checkCompatibility(Enchantment ench) {return !(ench instanceof MendingEnchantment) && super.checkCompatibility(ench);}
 
     @Override
-    public boolean isTreasureOnly() {return Config.ENABLE_WIDENING.get() && !Config.getEnchantmentSource(Config.ENABLE_TABLE);}
+    public boolean isTreasureOnly() {return BetterBridgingConfig.Enchantment.enableWidening && !BetterBridgingConfig.Enchantment.WideningFromEnchantmentTable;}
 
     @Override
-    public boolean isTradeable() {return Config.ENABLE_WIDENING.get() && Config.getEnchantmentSource(Config.ENABLE_TRADE);}
+    public boolean isTradeable() {return BetterBridgingConfig.Enchantment.enableWidening && BetterBridgingConfig.Enchantment.WideningCanBeTraded;}
 
     @Override
-    public boolean isDiscoverable() {return Config.ENABLE_WIDENING.get() && Config.getEnchantmentSource(Config.ENABLE_LOOT);}
+    public boolean isDiscoverable() {return BetterBridgingConfig.Enchantment.enableWidening && BetterBridgingConfig.Enchantment.WideningFromLootChests;}
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
-        return Config.ENABLE_WIDENING.get()
-                && Config.getEnchantmentSource(Config.ENABLE_TABLE)
+        return BetterBridgingConfig.Enchantment.enableWidening
+                && BetterBridgingConfig.Enchantment.WideningFromEnchantmentTable
                 && (stack.getItem() == ItemsInit.BRIDGE_BRACE.get() || stack.getItem() == Items.BOOK);
     }
 
     @Override
-    public boolean canEnchant(ItemStack stack) {return (stack.getItem() == ItemsInit.BRIDGE_BRACE.get() || stack.getItem() == Items.BOOK) && Config.ENABLE_WIDENING.get();}
+    public boolean canEnchant(ItemStack stack) {return (stack.getItem() == ItemsInit.BRIDGE_BRACE.get() || stack.getItem() == Items.BOOK) && BetterBridgingConfig.Enchantment.enableWidening;}
 
     @Override
-    public boolean isAllowedOnBooks() {return Config.ENABLE_WIDENING.get();}
+    public boolean isAllowedOnBooks() {return BetterBridgingConfig.Enchantment.enableWidening;}
 }

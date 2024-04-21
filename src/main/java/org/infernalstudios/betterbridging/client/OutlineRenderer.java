@@ -20,7 +20,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.infernalstudios.betterbridging.Config;
+import org.infernalstudios.betterbridging.BetterBridgingConfig;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
 import org.infernalstudios.betterbridging.items.ItemsInit;
 import org.infernalstudios.betterbridging.network.DirectionMap;
@@ -84,8 +84,8 @@ public class OutlineRenderer {
                 VoxelShape shape = Blocks.DIRT.defaultBlockState().getShape(level, pos);
                 renderVoxelShape(matrixStack, builder, shape, pos.getX() - pX, pos.getY() - pY, pos.getZ() - pZ, r, g, b, a/3);
 
-                int width = Config.DEFAULT_WIDTH.get();
-                if (Config.ENABLE_WIDENING.get()) {
+                int width = BetterBridgingConfig.General.defaultWidth;
+                if (BetterBridgingConfig.Enchantment.enableWidening) {
                     int enchLevel = player.getOffhandItem().getEnchantmentLevel(EnchantmentsInit.WIDENING.get());
                     if (enchLevel > 0) width = width + (enchLevel * 2);
                 }
