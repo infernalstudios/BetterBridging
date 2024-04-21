@@ -9,5 +9,8 @@
   },
   "client": [
     "LevelRendererMixin"
+  ],
+  "mixins": [
+    "PlayerMixin"
   ]
 }

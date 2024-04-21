@@ -11,6 +11,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -41,14 +42,14 @@ public class OutlineRenderer {
             float blockRange = 10;
             int offset = 1;
 
-            Level level = player.level();
+            Level level = player.level;
 
             Vec3 start = player.position().add(0, player.getEyeHeight(), 0);
             Vec3 range = player.getLookAngle().scale(blockRange);
             BlockHitResult raytrace = level
                     .clip(new ClipContext(start, start.add(range), ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
             if (raytrace.getType() == HitResult.Type.BLOCK && start.distanceToSqr(raytrace.getLocation()) <= Mth.square(Minecraft.getInstance().gameMode.getPickRange())) {
-                if (player.level().getBlockState(raytrace.getBlockPos()).canBeReplaced()) {
+                if (player.level.getBlockState(raytrace.getBlockPos()).getMaterial().isReplaceable()) {
                     offset = 0;
                 }
                 lookPos = raytrace.getBlockPos().relative(raytrace.getDirection(), offset);
@@ -60,7 +61,7 @@ public class OutlineRenderer {
         if (lookPos != null) {
 
             Player player = mc.player;
-            Level level = player.level();
+            Level level = player.level;
             level.getProfiler().popPush("outline");
             UUID playerId = player.getUUID();
             Direction nextDirection = getDirection(playerId);

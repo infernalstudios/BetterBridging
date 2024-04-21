@@ -1,9 +1,6 @@
 package org.infernalstudios.betterbridging.items;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.common.Mod;
@@ -46,5 +43,5 @@ public class ItemsInit {
         public Ingredient getRepairIngredient() {
             return Ingredient.of();
         }
-    }, new Item.Properties()));
+    }, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
 }

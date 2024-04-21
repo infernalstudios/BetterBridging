@@ -14,10 +14,8 @@
  */
 package org.infernalstudios.betterbridging;
 
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -27,7 +25,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.infernalstudios.betterbridging.client.RenderEvent;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
-import org.infernalstudios.betterbridging.events.CreativeTabEvents;
 import org.infernalstudios.betterbridging.items.*;
 import org.infernalstudios.betterbridging.events.BridgingEvents;
 import org.infernalstudios.betterbridging.network.DirectionMap;
@@ -51,7 +48,6 @@ public class BetterBridging {
 
         modBus.addListener(this::clientSetup);
         modBus.addListener(this::commonSetup);
-        modBus.addListener(CreativeTabEvents::registerCreativeTab);
 
         MinecraftForge.EVENT_BUS.register(new DirectionMap());
         MinecraftForge.EVENT_BUS.register(new BridgingEvents());
