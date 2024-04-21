@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath group: 'net.minecraftforge.gradle',           name: 'ForgeGradle', version: '5.1+',          changing: true
+        classpath group: 'net.minecraftforge.gradle',           name: 'ForgeGradle', version: '6.0+',          changing: true
         classpath group: 'org.spongepowered',                   name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath group: 'gradle.plugin.com.modrinth.minotaur', name: 'Minotaur',    version: '1.2.1'
         classpath group: 'gradle.plugin.com.matthewprenger',    name: 'CurseGradle', version: '1.4.0'
@@ -20,7 +20,7 @@ buildscript {
 
 plugins {
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'net.minecraftforge.gradle' version '6.0.+'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -176,4 +176,10 @@ def parseConfig(File config) {
         prop.load(it)
         return (new ConfigSlurper().parse(prop))
     }
+}
+
+sourceSets.each {
+    def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
+    it.output.resourcesDir = dir
+    it.java.destinationDirectory = dir
 }

@@ -1,6 +1,6 @@
 
 modLoader="javafml"
-loaderVersion="[46,)"
+loaderVersion="[49,)"
 license="Apache-2.0"
 [[mods]]
 modId="betterbridging"
@@ -17,12 +17,12 @@ Nekomaster1000 - Conceptualiser, Artist'''
 [[dependencies.betterbridging]]
     modId="forge"
     mandatory=true
-    versionRange="[46,)"
+    versionRange="[49,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.betterbridging]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20,)"
+    versionRange="[1.20.4,)"
     ordering="NONE"
     side="BOTH"

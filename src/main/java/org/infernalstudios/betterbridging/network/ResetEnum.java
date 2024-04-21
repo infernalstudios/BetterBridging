@@ -1,10 +1,9 @@
 package org.infernalstudios.betterbridging.network;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 
 import java.util.UUID;
-import java.util.function.Supplier;
 
 public class ResetEnum {
     UUID id;
@@ -21,9 +20,9 @@ public class ResetEnum {
         this.id = id;
     }
 
-    public void handle(Supplier<NetworkEvent.Context> ctx){
-        ctx.get().enqueueWork(this::handle);
-        ctx.get().setPacketHandled(true);
+    public void handle(CustomPayloadEvent.Context ctx){
+        ctx.enqueueWork(this::handle);
+        ctx.setPacketHandled(true);
     }
 
     private void handle() {

@@ -1,12 +1,9 @@
 package org.infernalstudios.betterbridging.network;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 
 import java.util.UUID;
-import java.util.function.Supplier;
 
 public class CycleEnum {
     private static final int MAX = 32767 * 2;
@@ -28,9 +25,9 @@ public class CycleEnum {
         this.dir = dir;
     }
 
-    public void handle(Supplier<NetworkEvent.Context> ctx){
-        ctx.get().enqueueWork(this::handle);
-        ctx.get().setPacketHandled(true);
+    public void handle(CustomPayloadEvent.Context ctx){
+        ctx.enqueueWork(this::handle);
+        ctx.setPacketHandled(true);
     }
 
     private void handle() {

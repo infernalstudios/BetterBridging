@@ -29,7 +29,7 @@ public class CycleDirectionEvent {
                 int updated = old+1;
                 if (updated > 3) updated = 0;
                 DirectionMap.DIRECTION_MAP.put(id, updated);
-                NetworkInit.INSTANCE.send(PacketDistributor.SERVER.noArg(), new CycleEnum(id, updated));
+                NetworkInit.INSTANCE.send(new CycleEnum(id, updated), PacketDistributor.SERVER.noArg());
             }
         }
     }

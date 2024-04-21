@@ -22,7 +22,7 @@ public class DirectionMap {
     public static void resetEnumOnJoin(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
         DIRECTION_MAP.put(player.getUUID(), 0);
-        NetworkInit.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), new ResetEnum(player.getUUID()));
+        NetworkInit.INSTANCE.send(new ResetEnum(player.getUUID()), PacketDistributor.PLAYER.with((ServerPlayer) player));
     }
 
     @SubscribeEvent

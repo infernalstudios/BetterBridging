@@ -1,22 +1,25 @@
 package org.infernalstudios.betterbridging.network;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.network.ChannelBuilder;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.network.SimpleChannel;
 import org.infernalstudios.betterbridging.BetterBridging;
 
 public class NetworkInit {
     public static SimpleChannel INSTANCE;
-    private static int ID = 0;
-
-    public static int nextID() {
-        return ID++;
-    }
 
     public static void registerPackets() {
-        INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(BetterBridging.MOD_ID, "packets"), () -> "1.0", s -> true, s -> true);
+        INSTANCE = ChannelBuilder.named(new ResourceLocation(BetterBridging.MOD_ID, "packets"))
+                .optional()
+                .acceptedVersions((status, version) -> true)
+                .networkProtocolVersion(1)
+                .simpleChannel();
 
-        INSTANCE.registerMessage(nextID(), CycleEnum.class, CycleEnum::encode, CycleEnum::new, CycleEnum::handle);
-        INSTANCE.registerMessage(nextID(), ResetEnum.class, ResetEnum::encode, ResetEnum::new, ResetEnum::handle);
+        INSTANCE.messageBuilder(CycleEnum.class, NetworkDirection.PLAY_TO_SERVER).encoder(CycleEnum::encode).decoder(CycleEnum::new).consumerNetworkThread(CycleEnum::handle).add();
+        INSTANCE.messageBuilder(ResetEnum.class, NetworkDirection.PLAY_TO_CLIENT).encoder(ResetEnum::encode).decoder(ResetEnum::new).consumerNetworkThread(ResetEnum::handle).add();
+        MinecraftForge.EVENT_BUS.register(new NetworkInit());
     }
 }
