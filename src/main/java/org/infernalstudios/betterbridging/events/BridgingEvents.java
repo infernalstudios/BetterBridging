@@ -41,6 +41,7 @@ public class BridgingEvents {
 
             int placedWidth = 1;
             int placedDistance = 0;
+            int blockCount = 0;
             int possibleDistance = player.getMainHandItem().getCount();
 
             LevelAccessor level = event.getWorld();
@@ -49,6 +50,7 @@ public class BridgingEvents {
                 if (event.getWorld().getBlockState(additionalPos).getMaterial().isReplaceable()) {
                     level.setBlock(additionalPos, event.getPlacedBlock(), 3);
                     possibleDistance--;
+                    blockCount++;
                     player.getOffhandItem().hurtAndBreak(1, player, (pl) -> {
                         pl.broadcastBreakEvent(EquipmentSlot.OFFHAND);
                     });
@@ -60,7 +62,7 @@ public class BridgingEvents {
                 nextDirection = nextDirection.getOpposite();
                 ++placedWidth;
                 placedDistance++;
-                LivingEntityAccess.get(player).setShrinkCount(placedDistance);
+                LivingEntityAccess.get(player).setShrinkCount(blockCount);
             }
         }
     }
