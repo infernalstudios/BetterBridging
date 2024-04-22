@@ -46,7 +46,7 @@ public class BridgingEvents {
             int placedWidth = 1;
             int placedDistance = 0;
             LevelAccessor level = event.getLevel();
-            while (placedWidth < width && player.getMainHandItem().getItem() instanceof BlockItem blockItem && blockItem.getBlock().defaultBlockState() == event.getPlacedBlock() && (player.getMainHandItem().getCount() > 1 || player.isCreative())) {
+            while (placedWidth < width && player.getMainHandItem().getItem() instanceof BlockItem blockItem && blockItem.getBlock() == event.getPlacedBlock().getBlock() && (player.getMainHandItem().getCount() > 1 || player.isCreative())) {
                 BlockPos additionalPos = event.getPos().relative(nextDirection, 1 + placedDistance / 2);
                 if (event.getLevel().getBlockState(additionalPos).canBeReplaced()) {
                     level.setBlock(additionalPos, event.getPlacedBlock(), 3);
