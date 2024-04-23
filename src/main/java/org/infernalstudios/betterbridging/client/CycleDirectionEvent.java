@@ -1,10 +1,8 @@
 package org.infernalstudios.betterbridging.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +11,6 @@ import org.infernalstudios.betterbridging.BetterBridging;
 import org.infernalstudios.betterbridging.network.CycleEnum;
 import org.infernalstudios.betterbridging.network.DirectionMap;
 import org.infernalstudios.betterbridging.network.NetworkInit;
-import org.infernalstudios.betterbridging.network.ResetEnum;
 
 import java.util.UUID;
 

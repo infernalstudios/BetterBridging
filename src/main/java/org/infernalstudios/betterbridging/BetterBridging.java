@@ -14,31 +14,25 @@
  */
 package org.infernalstudios.betterbridging;
 
-import net.minecraftforge.api.distmarker.Dist;
+import com.electronwill.nightconfig.core.io.ParsingException;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
-
-import java.io.IOException;
-
 import org.infernalstudios.betterbridging.client.RenderEvent;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
-import org.infernalstudios.betterbridging.events.CreativeTabEvents;
-import org.infernalstudios.betterbridging.items.*;
 import org.infernalstudios.betterbridging.events.BridgingEvents;
+import org.infernalstudios.betterbridging.events.CreativeTabEvents;
+import org.infernalstudios.betterbridging.items.ItemsInit;
 import org.infernalstudios.betterbridging.network.DirectionMap;
 import org.infernalstudios.betterbridging.network.NetworkInit;
 import org.infernalstudios.config.Config;
 
-import com.electronwill.nightconfig.core.io.ParsingException;
+import java.io.IOException;
 
 @Mod("betterbridging")
 public class BetterBridging {

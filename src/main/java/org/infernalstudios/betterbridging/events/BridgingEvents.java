@@ -1,28 +1,23 @@
 package org.infernalstudios.betterbridging.events;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.network.PacketDistributor;
 import org.infernalstudios.betterbridging.BetterBridgingConfig;
 import org.infernalstudios.betterbridging.enchantments.EnchantmentsInit;
 import org.infernalstudios.betterbridging.items.ItemsInit;
 import org.infernalstudios.betterbridging.network.DirectionMap;
-import org.infernalstudios.betterbridging.network.NetworkInit;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+
+import java.util.UUID;
 
 public class BridgingEvents {
 
